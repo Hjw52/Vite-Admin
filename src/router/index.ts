@@ -7,24 +7,24 @@ const routes:Array<RouteRecordRaw>=[
     },
     {
         path:"/dashboard",
-        name:"Dashboard",
+        name:"主面板",
         component:()=>import("../views/dashboard/index.vue"),
         children:[
             {
                 path: "work",
-                name: "Work",
+                name: "工作台",
                 component: () =>import("../views/dashboard/Work/index.vue")
             },
             {
                 path: "analyse",
-                name: "Analyse",
+                name: "分析台",
                 component: () =>import("../views/dashboard/Analyse/index.vue")
             }
         ]
     },
     {
         path: "/about",
-        name: "About",
+        name: "关于",
         component: () =>import("../views/dashboard/About/index.vue")
     }
 ];

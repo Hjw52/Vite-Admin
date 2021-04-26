@@ -78,7 +78,7 @@ export default defineComponent({
      height: 100vh;
  }
  .el-menu-vertical-demo:not(.el-menu--collapse) {
-    width: 14vw;
+    width: 220px;
     height: 100vh;
   }
   .logo{

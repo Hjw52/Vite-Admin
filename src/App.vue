@@ -15,11 +15,11 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, provide } from 'vue'
+import { computed, defineComponent, provide } from 'vue'
 import {ElContainer,ElAside,ElMain,ElHeader} from 'element-plus'
 import Headers from '../src/layouts/Header/index.vue'
 import Asider from '../src/layouts/Asider/index.vue'
-
+import { useStore} from 'vuex'
 import * as echarts from 'echarts'
 export default defineComponent({
   name: 'App',
@@ -28,6 +28,12 @@ export default defineComponent({
   },
   setup(){
     provide('echarts',echarts)
+    const store=useStore()
+    var IsCollapse=computed(()=>store.getters.getIsCollapse)
+    var siderWidth=computed(()=>(IsCollapse.value==true?"64px":"220px"))
+    return{
+      siderWidth
+    }
   }
 })
 </script>
@@ -44,11 +50,13 @@ body{
   color: #2c3e50;
 }
  .el-header{
-    margin-left: 14vw;
-    /* width: calc(100% - auto);  */
+    /* width: calc(100% - v-bind(siderWidth)); */
+    margin-left: v-bind(siderWidth);
     color: #333;
     text-align: center;
     line-height: 80px;
+    position: fixed;
+    top:0;
   }
 
   .el-aside {
@@ -58,11 +66,12 @@ body{
     height: 100vh;
     position: fixed;
     left: 0;
-    
   }
 
   .el-main {
-    margin-left: 14vw;
+    /* width: calc(100% - v-bind(siderWidth));  */
+    margin-left: v-bind(siderWidth);
+    margin-top: 80px;
     overflow-y: scroll;
     background-color: #E9EEF3;
     color: #333;

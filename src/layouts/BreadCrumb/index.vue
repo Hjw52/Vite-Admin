@@ -8,7 +8,7 @@
 </template>
 <script lang="ts">
 import {defineComponent, isReactive, onBeforeMount, reactive, ref, toRefs, watch} from 'vue'
-import {useRoute }from 'vue-router'
+import {useRoute, useRouter }from 'vue-router'
 import {ElBreadcrumb,ElBreadcrumbItem} from 'element-plus'
 interface RouterList{
      path:string,
@@ -31,6 +31,7 @@ export default defineComponent({
         watch(()=>router.path,()=>{
             load()
         })
+       
         const load=()=>{
             data.routerList=[]
             let path=router.path
