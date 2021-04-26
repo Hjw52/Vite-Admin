@@ -2,16 +2,18 @@
 <div class="bread">
 <BreadCrumb/>
 </div>
-  
+<Tabpane/>
+
 </template>
 
 <script lang="ts">
 import BreadCrumb from "../BreadCrumb/index.vue" 
+import Tabpane from "../Tabpane/index.vue"
 import {defineComponent} from 'vue'
 export default defineComponent({
     name:"headers",
     components:{
-        BreadCrumb
+        BreadCrumb,Tabpane
     },
     setup(){
 
