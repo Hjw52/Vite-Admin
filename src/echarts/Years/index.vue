@@ -3,6 +3,7 @@
 </template>
 <script lang="ts">
 import { inject, onMounted,defineComponent } from 'vue'
+import {elResize} from '../../utils/resize'
 export default defineComponent({
   setup(){
     name:"Years"  
@@ -57,6 +58,7 @@ export default defineComponent({
       
       let myChart=echarts.init(document.getElementById("year"))
       myChart.setOption(option,true)
+      elResize(myChart)
       window.addEventListener("resize",()=>{
         myChart.resize()
       })

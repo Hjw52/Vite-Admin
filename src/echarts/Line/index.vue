@@ -3,6 +3,7 @@
 </template>
 <script lang="ts">
 import { inject, onMounted,defineComponent } from 'vue'
+import {elResize} from '../../utils/resize'
 export default defineComponent({
   props:{
       id:String
@@ -71,6 +72,8 @@ export default defineComponent({
     onMounted(()=>{
       let myChart=echarts.init(document.getElementById(id))
       myChart.setOption(option,true)
+      //侧边栏变化 resize
+      elResize(myChart)
       window.addEventListener("resize",()=>{
         myChart.resize()
       })

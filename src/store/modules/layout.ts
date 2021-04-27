@@ -9,7 +9,6 @@ export default {
     mutations:{
         change(state:layoutState){
             state.isCollapse =!state.isCollapse
-            console.log(state.isCollapse)
         }
     },
     actions:{
