@@ -4,7 +4,7 @@
       <el-tab-pane
       v-for="item in tabList"
       :key="item.name"
-      :label="item.title"
+      :label="item.name"
       :name="item.name"
       /> 
     
@@ -37,11 +37,13 @@ export default defineComponent({
         const router=useRoute()
         const store=useStore()
         watch(()=>router.path,()=>{
+            console.log("："+JSON.stringify(store.state.TagView.visitedViews))
             store.dispatch("addVisitedView",router)
+             console.log("after："+JSON.stringify(store.state.TagView.visitedViews))
            // console.log(router)
         })
         data.tabList=store.getters.getVisitedViews
-      //  console.log(data.tabList)
+       // console.log("store:"+ JSON.stringify(store.state))
         const refData=toRefs(data)
         return {
             ...refData
