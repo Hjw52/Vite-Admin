@@ -13,8 +13,10 @@
 </template>
 
 <script lang="ts">
-import {defineComponent, reactive,toRefs} from 'vue'
+import {defineComponent, reactive,toRefs,watch} from 'vue'
 import {ElTabs,ElTabPane} from 'element-plus'
+import {useRoute} from 'vue-router'
+import {useStore} from 'vuex'
 interface data{
     tabList:Tablist[]
 }
@@ -31,17 +33,16 @@ export default defineComponent({
         const data=reactive<data>({
             tabList:[]
         })
+        
+        const router=useRoute()
+        const store=useStore()
+        watch(()=>router.path,()=>{
+            store.dispatch("addVisitedView",router)
+           // console.log(router)
+        })
+        data.tabList=store.getters.getVisitedViews
+      //  console.log(data.tabList)
         const refData=toRefs(data)
-        data.tabList=[{
-            title:'tab1',
-            name:'1',
-        },{
-            title:'tab2',
-            name:'2',
-        },{
-            title:'tab3',
-            name:'3',
-        }]
         return {
             ...refData
         }

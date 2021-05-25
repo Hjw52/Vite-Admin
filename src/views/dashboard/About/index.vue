@@ -30,7 +30,7 @@ export default defineComponent({
     ElDescriptions,ElDescriptionsItem
   },
   setup(){
-    const Description="vite-admin 是一个基于Vue3、Vite、 element-plus 、TypeScript 的后台解决方案，目标是为中大型项目开发,提供现成的开箱解决方案及丰富的示例。"
+    const Description="vite-admin 是一个基于Vue3、Vite、 Element-plus 、TypeScript 的后台解决方案，目标是为中大型项目开发,提供现成的开箱解决方案及丰富的示例。"
     let devDependencies:object[]= []
     let dependencies:object[]=[]
     let devDependcy:Dependcy=Package.devDependencies

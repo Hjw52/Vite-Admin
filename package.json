@@ -7,6 +7,9 @@
     "serve": "vite preview"
   },
   "dependencies": {
+    "@fullcalendar/daygrid": "^5.7.0",
+    "@fullcalendar/interaction": "^5.7.0",
+    "@fullcalendar/vue": "^5.7.0",
     "echarts": "^5.0.2",
     "element-plus": "^1.0.2-beta.41",
     "element-resize-detector": "^1.2.2",
