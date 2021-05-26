@@ -2,7 +2,7 @@
   <div :id="id" class="line"></div>
 </template>
 <script lang="ts">
-import { inject, onMounted,defineComponent } from 'vue'
+import { inject, onMounted,defineComponent, onBeforeUnmount } from 'vue'
 import {elResize} from '../../utils/resize'
 export default defineComponent({
   props:{
@@ -12,6 +12,7 @@ export default defineComponent({
     name:"Line"  
     var id=props.id||""
     let echarts:any=inject("echarts")
+    let myChart:any;
     let option={
             title: {
         text: '折线图'
@@ -70,13 +71,18 @@ export default defineComponent({
     ]
     }
     onMounted(()=>{
-      let myChart=echarts.init(document.getElementById(id))
+      myChart=echarts.init(document.getElementById(id))
       myChart.setOption(option,true)
       //侧边栏变化 resize
       elResize(myChart)
       window.addEventListener("resize",()=>{
         myChart.resize()
       })
+    })
+    onBeforeUnmount(()=>{
+       // console.log("unMount")
+       //console.log(myChart)
+        myChart.clear()
     })
     return{
         id
