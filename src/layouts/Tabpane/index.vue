@@ -1,27 +1,29 @@
 <template>
 <div>
- <el-tabs closable>
+
+    <el-tabs closable @tab-click="handleClick" @tab-remove="handleRemove">
       <el-tab-pane
       v-for="item in tabList"
-      :key="item.name"
+      :key="item.path"
       :label="item.name"
-      :name="item.name"
-      /> 
-    
-  </el-tabs>
+      :name="item.path"
+      > 
+      </el-tab-pane>
+      
+   </el-tabs>
 </div>
 </template>
 
 <script lang="ts">
 import {defineComponent, reactive,toRefs,watch} from 'vue'
 import {ElTabs,ElTabPane} from 'element-plus'
-import {useRoute} from 'vue-router'
+import {useRoute,useRouter} from 'vue-router'
 import {useStore} from 'vuex'
 interface data{
     tabList:Tablist[]
 }
 interface Tablist{
-    title:string,
+    path:string,
     name:string,
 }
 export default defineComponent({
@@ -35,6 +37,7 @@ export default defineComponent({
         })
         
         const router=useRoute()
+        const curRouter=useRouter()
         const store=useStore()
         watch(()=>router.path,()=>{
             console.log("："+JSON.stringify(store.state.TagView.visitedViews))
@@ -43,10 +46,24 @@ export default defineComponent({
            // console.log(router)
         })
         data.tabList=store.getters.getVisitedViews
-       // console.log("store:"+ JSON.stringify(store.state))
+       // console.log(data.tabList)
         const refData=toRefs(data)
+        const handleClick=(tag:any)=>{
+            //console.log(tag.props.name)
+            curRouter.push({path:tag.props.name})
+        }
+        const handleRemove=(name:string)=>{
+            store.dispatch("delVisitedView",name)
+            //console.log(name)
+            let len=store.getters.getVisitedViews.length
+            let last=data.tabList[len-1] && data.tabList[len-1].path||"/"
+            //console.log(last)
+            curRouter.push({path:last})
+        }
         return {
-            ...refData
+            ...refData,
+            handleClick,
+            handleRemove
         }
     }
 })

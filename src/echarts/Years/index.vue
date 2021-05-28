@@ -2,12 +2,13 @@
   <div id="year" class="year"></div>
 </template>
 <script lang="ts">
-import { inject, onMounted,defineComponent } from 'vue'
+import { inject, onMounted,defineComponent,onBeforeUnmount } from 'vue'
 import {elResize} from '../../utils/resize'
 export default defineComponent({
   setup(){
     name:"Years"  
     let echarts:any=inject("echarts")
+    let myChart:any;
     let option={
          title: {
         top: 30,
@@ -55,13 +56,16 @@ export default defineComponent({
     return data;
     }
     onMounted(()=>{
-      
-      let myChart=echarts.init(document.getElementById("year"))
+      myChart=echarts.init(document.getElementById("year"))
       myChart.setOption(option,true)
       elResize(myChart)
       window.addEventListener("resize",()=>{
         myChart.resize()
       })
+    })
+     onBeforeUnmount(()=>{
+       
+        myChart.clear()
     })
   }
 })

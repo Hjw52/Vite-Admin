@@ -8,7 +8,14 @@
         <Headers/>
       </el-header>
       <el-main>
-        <router-view/>
+        <!-- <keep-alive>
+            <router-view/>
+        </keep-alive> -->
+        <router-view v-slot="{ Component }">
+          <keep-alive>
+          <component :is="Component" />
+          </keep-alive>
+        </router-view>
       </el-main>
     </el-container>
   </el-container>
@@ -29,12 +36,6 @@ export default defineComponent({
   },
   setup(){
     provide('echarts',echarts)
-    const store=useStore()
-    var IsCollapse=computed(()=>store.getters.getIsCollapse)
-    var siderWidth=computed(()=>(IsCollapse.value==true?"64px":"220px"))
-    return{
-      siderWidth
-    }
   }
 })
 </script>
@@ -54,8 +55,6 @@ body{
   height: 100vh;
 }
  .el-header{
-    /* width: calc(100% - v-bind(siderWidth));
-    margin-left: v-bind(siderWidth); */
     color: #333;
     text-align: center;
     line-height: 80px;
@@ -66,13 +65,12 @@ body{
     color: #333;
     text-align: center;
     height: 100vh;
-    /* position: fixed;
-    left: 0; */
+    
   }
 
   .el-main {
     flex-grow: 1;
-    /* margin-left: v-bind(siderWidth); */
+    
     overflow: auto;
     background-color: #E9EEF3;
     color: #333;

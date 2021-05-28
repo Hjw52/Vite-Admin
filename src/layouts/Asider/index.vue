@@ -1,8 +1,8 @@
 <template>
 
 <el-menu default-active="1-1" class="el-menu-vertical-demo" @open="handleOpen" @close="handleClose" :collapse="isCollapse"  background-color="#001529"
-    text-color="#fff"
-    active-text-color="#ffd04b"
+    text-color="#e4e4e7"
+    active-text-color="#fff"
     router:true
     collapse-transition:true>
     <div class="logo" @click="handleCollapse">
@@ -20,8 +20,6 @@
       <router-link to="/dashboard/work">
         <el-menu-item index="1-2">工作台</el-menu-item>
      </router-link>
-    
-     
     </el-menu-item-group>
   </el-submenu>
   <router-link to="/about">
@@ -87,4 +85,11 @@ export default defineComponent({
       min-height: 50px;
       background-color: #001529;
   }
+.el-menu-item.is-active {
+   background-color:#0960bd !important;
+}
+a{
+   text-decoration:none;
+}
+
 </style>

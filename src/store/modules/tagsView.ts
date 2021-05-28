@@ -8,17 +8,15 @@ export default{
     },
     mutations:{
         ADD_VISITED_VIEW:(state:tagsViewState,view:RouteRecordRaw)=>{
-            
-            state.visitedViews.length && console.log(state.visitedViews[0].path)
             if(state.visitedViews.some(v=>v.path===view.path)) {
-                console.log('same')
                 return
             }
-            state.visitedViews.push(view)
+            //深拷贝
+            state.visitedViews.push(Object.assign({},view))
         },
-        DEL_VISITED_VIEW: (state:tagsViewState,view:RouteRecordRaw) => {
+        DEL_VISITED_VIEW: (state:tagsViewState,view:string) => {
             for (const [i, v] of state.visitedViews.entries()) {
-              if (v.path === view.path) {
+              if (v.path === view) {
                 state.visitedViews.splice(i, 1)
                 break
               }
@@ -30,7 +28,7 @@ export default{
         addVisitedView(context:any,view:RouteRecordRaw) {
             context.commit('ADD_VISITED_VIEW', view)
         },
-        delVisitedView(context:any,view:RouteRecordRaw) {
+        delVisitedView(context:any,view:string) {
             context.commit('DEL_VISITED_VIEW', view)
         }
     },
