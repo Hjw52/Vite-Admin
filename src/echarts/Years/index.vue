@@ -50,6 +50,7 @@ export default defineComponent({
     for (var time = date; time < end; time += dayTime) {
         data.push([
             echarts.format.formatTime('yyyy-MM-dd', time),
+           // echarts.time.format(time,'yyyy-MM-dd'),
             Math.floor(Math.random() * 10000)
         ]);
     }
@@ -64,7 +65,8 @@ export default defineComponent({
       })
     })
      onBeforeUnmount(()=>{
-       
+       // console.log("unMount")
+       //console.log(myChart)
         myChart.clear()
     })
   }

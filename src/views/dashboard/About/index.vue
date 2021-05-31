@@ -1,4 +1,6 @@
 <template>
+<div>
+
 <div class="about-header">
   <h2>关于</h2>
   <p>{{Description}}</p>
@@ -14,6 +16,7 @@
 <el-descriptions title="开发环境依赖" direction="horizontal" :column="3" border>
   <el-descriptions-item v-for="item in devDependencies" :key="item.name" :label="item.name">{{item.verson}}</el-descriptions-item>
 </el-descriptions>
+ </div>
  </div>
 </template>
 

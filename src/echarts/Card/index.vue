@@ -1,5 +1,7 @@
 <template>
-  <div :id="id" class="card"></div>
+  <div :id="id" class="card">
+    
+  </div>
 </template>
 <script lang="ts">
 import { number } from 'echarts'
